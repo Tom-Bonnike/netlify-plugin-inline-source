@@ -8,7 +8,7 @@ const writeFile = util.promisify(fs.writeFile)
 const getHtmlFiles = async (directory) => {
   const files = await readdirp.promise(directory, { fileFilter: '*.html' })
 
-  return files
+  return files.map((file) => file.path)
 }
 
 const inlineSources = async ({ htmlFiles, inputs, constants, utils }) => {
@@ -17,26 +17,32 @@ const inlineSources = async ({ htmlFiles, inputs, constants, utils }) => {
       inlineSource(file, { ...inputs, rootpath: constants.PUBLISH_DIR })
     )
     const htmlWithInlinedSources = await Promise.all(inlineSourcePromises)
+
     return htmlWithInlinedSources
   } catch (error) {
-    utils.build.failBuild('Inlining sources failed.', { error })
+    return utils.build.failBuild('Inlining sources failed.', { error })
   }
 }
 
 module.exports = {
   onPostBuild: async ({ inputs, constants, utils }) => {
-      const htmlFiles = await getHtmlFiles(constants.PUBLISH_DIR)
-      const htmlWithInlinedSources = await inlineSources({ htmlFiles, inputs, constants, utils })
-      const overwriteFilePromises = htmlWithInlinedSources.map(
-        (content, index) => {
-          const filePath = path.join(constants.PUBLISH_DIR, htmlFiles[index])
+    const htmlFiles = await getHtmlFiles(constants.PUBLISH_DIR)
+    const htmlWithInlinedSources = await inlineSources({
+      htmlFiles,
+      inputs,
+      constants,
+      utils
+    })
+    const overwriteFilePromises = htmlWithInlinedSources.map(
+      (content, index) => {
+        const filePath = path.join(constants.PUBLISH_DIR, htmlFiles[index])
 
-          return writeFile(filePath, content)
-        }
-      )
+        return writeFile(filePath, content)
+      }
+    )
 
-      await Promise.all(overwriteFilePromises)
+    await Promise.all(overwriteFilePromises)
 
-      console.log('Sources successfully inlined!')
+    console.log('Sources successfully inlined!')
   }
 }
