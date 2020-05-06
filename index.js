@@ -2,13 +2,13 @@ const util = require('util')
 const fs = require('fs')
 const path = require('path')
 const { inlineSource } = require('inline-source')
-const readdir = util.promisify(fs.readdir)
+const readdirp = require('readdirp')
 const writeFile = util.promisify(fs.writeFile)
 
 const getHtmlFiles = async (directory) => {
-  const files = await readdir(directory)
+  const files = await readdirp.promise(directory, { fileFilter: '*.html' })
 
-  return files.filter((file) => path.extname(file) === '.html')
+  return files
 }
 
 module.exports = {

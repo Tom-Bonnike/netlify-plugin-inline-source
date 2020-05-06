@@ -25,6 +25,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "inline-source": "^7.2.0"
+    "inline-source": "^7.2.0",
+    "readdirp": "^3.4.0"
   }
 }
