@@ -11,6 +11,7 @@
   "bugs": {
     "url": "https://github.com/Tom-Bonnike/netlify-plugin-inline-source/issues"
   },
+  "homepage": "https://github.com/Tom-Bonnike/netlify-plugin-inline-source#readme",
   "keywords": [
     "netlify",
     "netlify-plugin",
