@@ -1,0 +1,29 @@
+{
+  "name": "netlify-plugin-inline-source",
+  "version": "1.0.0",
+  "description": "A Netlify plugin to inline your assets/sources, built on top of the `inline-source` package.",
+  "license": "MIT",
+  "author": "Tom Bonnike (bonniketom@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tom-Bonnike/netlify-plugin-inline-source.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tom-Bonnike/netlify-plugin-inline-source/issues"
+  },
+  "keywords": [
+    "netlify",
+    "netlify-plugin",
+    "inline-source",
+    "inline",
+    "assets",
+    "sources"
+  ],
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "inline-source": "^7.2.0"
+  }
+}
