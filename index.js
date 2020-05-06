@@ -8,7 +8,7 @@ const writeFile = util.promisify(fs.writeFile)
 const getHtmlFiles = async (directory) => {
   const files = await readdirp.promise(directory, { fileFilter: '*.html' })
 
-  return files
+  return files.map(({ path }) => path)
 }
 
 const inlineSources = async ({ htmlFiles, inputs, constants, utils }) => {
