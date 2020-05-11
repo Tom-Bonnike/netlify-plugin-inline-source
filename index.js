@@ -8,13 +8,13 @@ const writeFile = util.promisify(fs.writeFile)
 const getHtmlFiles = async (directory) => {
   const files = await readdirp.promise(directory, { fileFilter: '*.html' })
 
-  return files.map((file) => file.path)
+  return files.map((file) => file.fullPath)
 }
 
-const inlineSources = async ({ htmlFiles, inputs, constants, utils }) => {
+const inlineSources = async ({ htmlFiles, inputs, utils }) => {
   try {
     const inlineSourcePromises = htmlFiles.map((file) =>
-      inlineSource(file, { ...inputs, rootpath: constants.PUBLISH_DIR })
+      inlineSource(file, inputs)
     )
     const htmlWithInlinedSources = await Promise.all(inlineSourcePromises)
 
@@ -30,7 +30,6 @@ module.exports = {
     const htmlWithInlinedSources = await inlineSources({
       htmlFiles,
       inputs,
-      constants,
       utils
     })
     const overwriteFilePromises = htmlWithInlinedSources.map(
