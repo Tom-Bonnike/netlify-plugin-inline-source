@@ -32,7 +32,7 @@ To install the plugin, add it to your `netlify.toml` file.
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-inline-source"
+  package = "netlify-plugin-inline-source"
 
   # All inputs are optional, so you can omit this section.
   # Defaults are shown below.
