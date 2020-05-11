@@ -11,7 +11,7 @@ const getHtmlFiles = async (directory) => {
   return files.map((file) => file.fullPath)
 }
 
-const inlineSources = async ({ htmlFiles, inputs, utils }) => {
+const getHtmlWithInlinedSources = async ({ htmlFiles, inputs, utils }) => {
   try {
     const inlineSourcePromises = htmlFiles.map((file) =>
       inlineSource(file, inputs)
@@ -24,24 +24,26 @@ const inlineSources = async ({ htmlFiles, inputs, utils }) => {
   }
 }
 
+const overwriteHtmlFiles = async ({ htmlFiles, htmlWithInlinedSources }) => {
+  const overwriteFilePromises = htmlFiles.map((filePath, index) => {
+    const content = htmlWithInlinedSources[index]
+
+    return writeFile(filePath, content)
+  })
+
+  await Promise.all(overwriteFilePromises)
+}
+
 module.exports = {
   onPostBuild: async ({ inputs, constants, utils }) => {
     const htmlFiles = await getHtmlFiles(constants.PUBLISH_DIR)
-    const htmlWithInlinedSources = await inlineSources({
+    const htmlWithInlinedSources = await getHtmlWithInlinedSources({
       htmlFiles,
       inputs,
       utils
     })
-    const overwriteFilePromises = htmlWithInlinedSources.map(
-      (content, index) => {
-        const filePath = path.join(constants.PUBLISH_DIR, htmlFiles[index])
 
-        return writeFile(filePath, content)
-      }
-    )
-
-    await Promise.all(overwriteFilePromises)
-
+    await overwriteHtmlFiles({ htmlFiles, htmlWithInlinedSources })
     console.log('Sources successfully inlined!')
   }
 }
