@@ -1,6 +1,6 @@
 {
   "name": "netlify-plugin-inline-source",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Netlify plugin to inline your assets/sources, built on top of the `inline-source` package.",
   "license": "MIT",
   "author": "Tom Bonnike (bonniketom@gmail.com)",
