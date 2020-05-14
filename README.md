@@ -1,8 +1,8 @@
 # netlify-plugin-inline-source
 
-A Netlify Build plugin to inline your assets/sources, built on top of the [`inline-source` package](https://github.com/popeindustries/inline-source). By default, it inlines and compresses tags that use the `inline` attribute and supports `<script>`, `<link>`, and `<img>` (including `svg`).
+A Netlify Build plugin to inline your assets/sources, built on top of the [`inline-source` package](https://github.com/popeindustries/inline-source). By default, it inlines and compresses tags that use the `inline` attribute and supports `<script>`, `<link>`, and `<img>`.
 
-Inlining your assets/sources can lead to faster websites as it reduces the number of HTTP requests, at the cost of making your HTML files heavier. For best performance, you should only inline critical content and let the rest load normally.
+Inlining your assets/sources can lead to faster websites as it reduces the number of HTTP requests, at the cost of making your HTML files heavier. For best performance, you should usually only inline critical, [render-blocking resources](https://web.dev/render-blocking-resources/) and let the rest load normally.
 
 ```html
 <html>
