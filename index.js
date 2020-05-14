@@ -11,10 +11,15 @@ const getHtmlFiles = async (directory) => {
   return files.map((file) => file.fullPath)
 }
 
-const getHtmlWithInlinedSources = async ({ htmlFiles, inputs, utils }) => {
+const getHtmlWithInlinedSources = async ({
+  htmlFiles,
+  inputs,
+  constants,
+  utils
+}) => {
   try {
     const inlineSourcePromises = htmlFiles.map((file) =>
-      inlineSource(file, inputs)
+      inlineSource(file, { ...inputs, rootpath: constants.PUBLISH_DIR })
     )
     const htmlWithInlinedSources = await Promise.all(inlineSourcePromises)
 
@@ -40,6 +45,7 @@ module.exports = {
     const htmlWithInlinedSources = await getHtmlWithInlinedSources({
       htmlFiles,
       inputs,
+      constants,
       utils
     })
 
