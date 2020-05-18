@@ -6,7 +6,10 @@ const readdirp = require('readdirp')
 const writeFile = util.promisify(fs.writeFile)
 
 const getHtmlFiles = async (directory) => {
-  const files = await readdirp.promise(directory, { fileFilter: '*.html' })
+  const files = await readdirp.promise(directory, {
+    fileFilter: '*.html',
+    directoryFilter: ['!node_modules']
+  })
 
   return files.map((file) => file.fullPath)
 }
