@@ -29,7 +29,10 @@ If you want to automatically extract and inline your critical CSS, you can use [
 
 ## Usage and inputs
 
-To install the plugin, add it to your `netlify.toml` file.
+To install the plugin in the Netlify UI, use this [direct in-app installation link](https://app.netlify.com/plugins/netlify-plugin-inline-source/install) or go to the [Plugins directory](https://app.netlify.com/plugins).
+
+
+For file-based installation, add it to your `netlify.toml` file.
 
 ```toml
 [[plugins]]
@@ -53,6 +56,12 @@ To install the plugin, add it to your `netlify.toml` file.
 
     # Convert `<img inline src="*.svg" />` to `<img>` and not `<svg>`.
     svgAsImage = false
+```
+
+To complete file-based installation, from your project's base directory, use npm, yarn, or any other Node.js package manager to add the plugin to `devDependencies` in `package.json`.
+
+```bash
+npm install -D netlify-plugin-inline-source
 ```
 
 Once installed and configured, the plugin will automatically run on the Netlify CI.
