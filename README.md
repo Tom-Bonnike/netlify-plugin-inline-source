@@ -58,17 +58,17 @@ For file-based installation, add it to your `netlify.toml` file.
     svgAsImage = false
 ```
 
-To complete file-based installation, from your project's base directory, use npm, yarn, or any other Node.js package manager to add the plugin to `devDependencies` in `package.json`.
+To complete file-based installation, from your project’s base directory, use npm, yarn, or any other Node.js package manager to add the plugin to `devDependencies` in `package.json`.
 
 ```bash
 npm install -D netlify-plugin-inline-source
 ```
 
-Once installed and configured, the plugin will automatically run on the Netlify CI.
+Once installed and configured, the plugin will automatically run for all of your site’s deploys.
 
 ### Testing locally
 
-To test this plugin locally, you can use the [Netlify CLI](https://github.com/netlify/cli):
+To [test this plugin locally](https://docs.netlify.com/configure-builds/build-plugins/create-plugins/#local-plugins), you can use the [Netlify CLI](https://docs.netlify.com/cli/get-started/#run-builds-locally):
 
 ```bash
 # Install the Netlify CLI.
